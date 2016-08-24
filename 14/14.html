@@ -14,58 +14,24 @@
     <script>
         document.addEventListener('DOMContentLoaded', function(event) {
             var clock1over = false;
-            $.getJSON('https://daofork-slacknation.rhcloud.com/getChart4', function(data) {
-                updateInfo(data);
-            });
+            var proposal13 = {
+                "recipient": "0x59bc61238a2059e33d5fc0f91b8b8ce5cb45858d",
+                "amount": "7.277385711515429e+24",
+                "description": "A",
+                "votingDeadline": "1470615925",
+                "open": false,
+                "proposalPassed": true,
+                "proposalHash": "0x62e72b059b8cbdacaa06dcd8db56ee40bdecd36d4c11fdcc956319faf9052901",
+                "proposalDeposit": "0",
+                "newCurator": false,
+                "yea": "4.511926852662654395446566e+24",
+                "nay": "0",
+                "creator": "0x59bc61238a2059e33d5fc0f91b8b8ce5cb45858d"
+            };
+            $('#proposal13').html(JSON.stringify(proposal13, undefined, 2));
+            $('#dao1add').html('0xb136707642a4ea12fb4bae820f03d2562ebff487');
+            $('#dao2add').html('0x84ef4b2357079cd7a7c69fd7a37cd0609a679106');
 
-            function updateInfo(data) {
-                if (data[data.length - 1].blockTime > 0) {
-                    $('#dao1eth').html(accounting.formatNumber(data[data.length - 1].dao1.ether + data[data.length - 1].dao1.etherE));
-                    $('#dao1add').html(data[data.length - 1].dao1.address);
-                    $('#dao1addE').html(data[data.length - 1].dao1.addressE);
-                    $('#dao2eth').html(accounting.formatNumber(data[data.length - 1].dao2.ether + data[data.length - 1].dao2.etherE));
-                    $('#dao2add').html(data[data.length - 1].dao2.address);
-                    $('#dao2addE').html(data[data.length - 1].dao2.addressE);
-                    $('#recipienteth').html(accounting.formatNumber(data[data.length - 1].recipient.ether));
-                    $('#recipientadd').html(data[data.length - 1].recipient.address);
-                    $('#proposal3').html(JSON.stringify(data[data.length - 1].dao13, undefined, 2));
-                    $('#proposal4').html(JSON.stringify(data[data.length - 1].dao24, undefined, 2));
-                    if (clock1over && data[data.length - 1].dao13.yea < 1) {
-                        $('#clock').html('proposal failed with too little votes');
-                    }
-                }
-            }
-            $('#clock')
-                .countdown(1470615925000)
-                .on('update.countdown', function(event) {
-                    var format = '%H:%M:%S';
-                    if (event.offset.days > 0) {
-                        format = '%-d day%!d ' + format;
-                    }
-                    if (event.offset.weeks > 0) {
-                        format = '%-w week%!w ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function(event) {
-                    $(this).html('etc might be moved anytime!');
-                    clock1over = true;
-                });
-            $('#clock2')
-                .countdown(1470666769000)
-                .on('update.countdown', function(event) {
-                    var format = '%H:%M:%S';
-                    if (event.offset.days > 0) {
-                        format = '%-d day%!d ' + format;
-                    }
-                    if (event.offset.weeks > 0) {
-                        format = '%-w week%!w ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function(event) {
-                    $(this).html('etc might be moved anytime!');
-                });
         });
 
     </script>
@@ -80,20 +46,13 @@
     </section>
     <section class="main-content">
         <h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>14. Whitehat's etc</h3>
-        <div>dao 1 : <span style="color:#159957;font-size:20px;" id="dao1eth">...</span> ether <span id="clock" class="countdown" style="color:red;"></span></div>
-        <div>address: <span style="color:#159957;font-size:20px;" id="dao1add">...</span></div>
-        <div>extraBalance address: <span style="color:#159957;font-size:20px;" id="dao1addE">...</span></div>
+        <div>dao 1 address: <span style="color:#159957;font-size:20px;" id="dao1add">...</span></div>
+        <div>proposal 3:</div>
+        <pre id="proposal13"></pre>
         <p></p>
-        <div>dao 2: <span style="color:#159957;font-size:20px;" id="dao2eth">...</span> ether <span id="clock2" class="countdown" style="color:red;"></span></div>
-        <div>address: <span style="color:#159957;font-size:20px;" id="dao2add">...</span></div>
-        <div>extraBalance address: <span style="color:#159957;font-size:20px;" id="dao2addE">...</span></div>
-        <p></p>
-        <div>recipient for both dao: <span style="color:#159957;font-size:20px;" id="recipienteth">...</span> ether <span style="color:#159957;font-size:20px;" id="recipientadd">...</span></div>
-        <p></p>
-        <div>dao 1's proposal 3:</div>
-        <pre id="proposal3"></pre>
-        <div>dao 2's proposal 4:</div>
-        <pre id="proposal4"></pre>
+        <div>dao 2 address: <span style="color:#159957;font-size:20px;" id="dao2add">...</span></div>
+        <!-- <div>proposal 4:</div> -->
+        <!-- <pre id="proposal24"></pre> -->
         <footer class="site-footer">
             <span class="site-footer-owner">Maintained by <a href="https://github.com/slacknation/medium/tree/gh-pages">slacknation</a> at gmail.com</span>
             <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
