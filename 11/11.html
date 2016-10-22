@@ -18,120 +18,13 @@
         var color = ['#00A388', '#E74C3C', '#3498DB', '#FF851B'];
         var forkBlock = 1920000;
         document.addEventListener('DOMContentLoaded', function(event) {
-            Highcharts.setOptions({
-                global: {
-                    useUTC: false
-                },
-                lang: {
-                    thousandsSep: ','
-                }
-            });
-            d3.json('https://daofork-slacknation.rhcloud.com/getChart1', function(data) {
-                updateInfo(data);
-                var ethusd = [];
-                var ethInRefund = [];
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].ethusd > 0 && data[i].blockTime > 0) {
-                        ethusd.push([data[i].time, data[i].ethusd]);
-                        if (data[i].startEthInRefund > 0) {
-                            ethInRefund.push([data[i].time, data[i].ethInRefund / data[i].startEthInRefund * 100]);
-                        }
-                    }
-                }
-                $('#chart').highcharts({
-                    chart: {
-                        alignTicks: false
-                    },
-                    title: {
-                        text: null
-                    },
-                    xAxis: {
-                        type: 'datetime'
-                    },
-                    yAxis: [{
-                        gridLineWidth: 0.8,
-                        lineWidth: 1,
-                        tickWidth: 1,
-                        title: {
-                            text: 'ethusd',
-                            style: {
-                                color: color[0]
-                            }
-                        },
-                        labels: {
-                            style: {
-                                color: color[0]
-                            }
-                        },
-                        opposite: true
-                    }, {
-                        max: 100,
-                        lineWidth: 1,
-                        tickWidth: 1,
-                        title: {
-                            text: '%',
-                            style: {
-                                color: color[1]
-                            }
-                        },
-                        labels: {
-                            style: {
-                                color: color[1]
-                            }
-                        },
-                        gridLineWidth:0,
-                        opposite: true
-                    }],
-                    tooltip: {
-                        shared: true,
-                        borderColor: '#000000',
-                        followPointer: true
-                    },
-                    legend: {
-                        align: 'center',
-                        verticalAlign: 'bottom',
-                        floating: false,
-                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-                    },
-                    series: [{
-                        name: 'ethusd',
-                        type: 'spline',
-                        color: color[0],
-                        data: ethusd,
-                        tooltip: {
-                            valueDecimals: 2
-                        },
-                        marker: {
-                            enabled: false
-                        }
-                    }, {
-                        yAxis: 1,
-                        name: '% ether not withdrawn',
-                        type: 'spline',
-                        color: color[1],
-                        data: ethInRefund,
-                        tooltip: {
-                            valueDecimals: 2
-                        },
-                        marker: {
-                            enabled: false
-                        }
-                    }]
-                });
-            });
 
             $('#refundAdd').html('0xbf4ed7b27f1d666546e30d74d50d173d20bca754');
             $('#refundRate').html('1 eth per 100 dao tokens');
             $('#trusteeAdd').html('0xda4a4626d3e16e094de3225a751aab7128e96526');
+            $('#extraBalanceAdd').html('0x755cdba6AE4F479f7164792B318b2a06c759833B');
 
-            function updateInfo(data) {
-                if (data[data.length - 1].startEthInRefund > 0) {
-                    $('#tokensEligible').html('<span style="color:#159957;font-size:20px;">' + accounting.formatNumber(data[data.length - 1].startEthInRefund) + '</span> ether in refund at block 1,920,000');
-                    $('#refundEther').html('<span style="color:#159957;font-size:20px;">' + accounting.formatNumber(data[data.length - 1].ethInRefund) + '</span> ether in refund');
-                    $('#ethRefunded').html('<span style="color:#159957;font-size:20px;">' + accounting.formatNumber(data[data.length - 1].startEthInRefund - data[data.length - 1].ethInRefund) + '</span> ether withdrawn');
-                    $('#leftTrustee').html('<span style="color:#159957;font-size:20px;">' + accounting.formatNumber(data[data.length - 1].ethInTrust) + '</span> ether in trustee');
-                }
-            }
+            $('#tokensEligible').html('<span style="color:#159957;font-size:20px;">' + accounting.formatNumber(12001961.845205763) + '</span> ether in refund at block 1,920,000');
         });
 
     </script>
@@ -150,11 +43,8 @@
         <div>refund address: <span style="color:#159957;font-size:20px;" id="refundAdd">...</span></div>
         <div>refund rate: <span style="color:#159957;font-size:20px;" id="refundRate">...</span></div>
         <div>trustee address: <span style="color:#159957;font-size:20px;" id="trusteeAdd">...</span></div>
+        <div>extra balance refund address: <span style="color:#159957;font-size:20px;" id="extraBalanceAdd">...</span></div>
         <div id="tokensEligible"></div>
-        <div id="refundEther"></div>
-        <div id="ethRefunded"></div>
-        <div id="leftTrustee"></div>
-        <div id="chart"></div>
         <footer class="site-footer">
             <span class="site-footer-owner">Maintained by <a href="https://github.com/slacknation/medium/tree/gh-pages">slacknation</a> at gmail.com</span>
             <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
